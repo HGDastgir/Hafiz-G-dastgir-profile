@@ -223,7 +223,7 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
 
     <nav class="hidden lg:flex items-center gap-7 mx-auto" aria-label="Primary">
       <a href="#home" class="nav-link active" data-i18n="nav_home">Home</a>
-      <a href="#tutor" class="nav-link" data-i18n="nav_tutor">AI Tutor</a>
+      <a href="#tutor" class="nav-link">Web Search</a>
       <a href="#tools" class="nav-link" data-i18n="nav_tools">Study Tools</a>
       <a href="#courses" class="nav-link" data-i18n="nav_courses">Courses</a>
       <a href="#quiz" class="nav-link" data-i18n="nav_quiz">Quiz</a>
@@ -260,7 +260,7 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
     <button id="mobile-close" class="icon-btn" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
   </div>
   <a href="#home" class="mobile-link py-3 border-b border-soft" data-i18n="nav_home">Home</a>
-  <a href="#tutor" class="mobile-link py-3 border-b border-soft" data-i18n="nav_tutor">AI Tutor</a>
+  <a href="#tutor" class="mobile-link py-3 border-b border-soft">Web Search</a>
   <a href="#tools" class="mobile-link py-3 border-b border-soft" data-i18n="nav_tools">Study Tools</a>
   <a href="#courses" class="mobile-link py-3 border-b border-soft" data-i18n="nav_courses">Courses</a>
   <a href="#quiz" class="mobile-link py-3 border-b border-soft" data-i18n="nav_quiz">Quiz</a>
@@ -297,7 +297,7 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
           <i data-lucide="rocket" class="w-4 h-4"></i> <span data-i18n="hero_cta1">Start Learning Free</span>
         </button>
         <button class="btn btn-ghost" onclick="scrollToId('tutor')">
-          <i data-lucide="bot" class="w-4 h-4"></i> <span data-i18n="hero_cta2">Try AI Tutor</span>
+          <i data-lucide="search" class="w-4 h-4"></i> <span>Search the Web</span>
         </button>
       </div>
       <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-mute">
@@ -359,100 +359,53 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
     <i data-lucide="rectangle-horizontal" class="w-4 h-4"></i>Advertisement
   </div>
 </div>
-<!-- ============ AI TUTOR ============ -->
+<!-- ============ WEB SEARCH ============ -->
 <section id="tutor" class="section-pad relative">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
-      <span class="chip glass text-brand-blue mb-4"><i data-lucide="bot" class="w-3.5 h-3.5"></i> AI TUTOR</span>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-4" data-i18n="tutor_title">Ask your AI Tutor anything</h2>
-      <p class="text-dim" data-i18n="tutor_subtitle">Real answers powered by Claude — pick a subject, ask your question, and learn step by step.</p>
+      <span class="chip glass text-brand-blue mb-4"><i data-lucide="globe" class="w-3.5 h-3.5"></i> WEB SEARCH</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-4">Search the web for anything</h2>
+      <p class="text-dim">Pick a search engine, type your question, and get results in a new tab — no account or API key needed.</p>
     </div>
 
-    <div class="grid lg:grid-cols-5 gap-6" data-reveal>
-      <!-- controls -->
-      <div class="lg:col-span-2 card p-5 sm:p-6 flex flex-col gap-4">
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="text-xs text-mute font-semibold mb-1.5 block" data-i18n="lbl_subject">Subject</label>
-            <select id="tutor-subject" class="w-full rounded-xl px-3 py-2.5 text-sm">
-              <option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option>
-              <option>English</option><option>Computer Science</option><option>Business</option><option>Accounting</option>
-              <option>Economics</option><option>History</option><option>Geography</option><option>General Knowledge</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs text-mute font-semibold mb-1.5 block" data-i18n="lbl_level">Level</label>
-            <select id="tutor-level" class="w-full rounded-xl px-3 py-2.5 text-sm">
-              <option>Primary School</option><option>Middle School</option><option selected>High School</option>
-              <option>College</option><option>University</option><option>Professional</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs text-mute font-semibold mb-1.5 block" data-i18n="lbl_language">Language</label>
-            <select id="tutor-language" class="w-full rounded-xl px-3 py-2.5 text-sm">
-              <option>English</option><option>Urdu</option><option>Arabic</option><option>Hindi</option><option>French</option>
-              <option>Spanish</option><option>German</option><option>Turkish</option><option>Chinese</option><option>Japanese</option><option>Korean</option><option>Portuguese</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs text-mute font-semibold mb-1.5 block" data-i18n="lbl_difficulty">Difficulty</label>
-            <select id="tutor-difficulty" class="w-full rounded-xl px-3 py-2.5 text-sm">
-              <option>Easy</option><option selected>Medium</option><option>Hard</option>
-            </select>
-          </div>
-        </div>
+    <div class="max-w-3xl mx-auto card p-5 sm:p-8" data-reveal>
+      <!-- engine tabs -->
+      <div id="search-tabs" class="flex flex-wrap gap-2 mb-5" role="tablist" aria-label="Search engines"></div>
 
-        <div>
-          <textarea id="tutor-input" rows="4" class="w-full rounded-xl px-3.5 py-3 text-sm resize-none" data-i18n-placeholder="tutor_placeholder" placeholder="Type your question here… e.g. Explain Newton's second law with an example"></textarea>
+      <!-- query -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="relative flex-1">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 text-mute"></i>
+          <input id="search-input" type="text" class="w-full rounded-xl pl-10 rtl:pl-3.5 rtl:pr-10 pr-3.5 py-3 text-sm"
+                 placeholder="Type your question… e.g. Explain Newton's second law with an example"
+                 aria-label="Search query">
         </div>
+        <button id="search-go" class="btn btn-primary justify-center" onclick="runWebSearch()">
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i> <span id="search-go-label">Search Google</span>
+        </button>
+      </div>
+      <p class="text-[11px] text-mute mt-2">Results open in a new browser tab on the engine you picked.</p>
 
-        <div id="tutor-file-preview" class="hidden flex-wrap gap-2"></div>
-
-        <div class="flex items-center gap-2 flex-wrap">
-          <button id="tutor-mic" class="icon-btn" aria-label="Ask by voice" title="Ask by voice"><i data-lucide="mic" class="w-4 h-4"></i></button>
-          <label class="icon-btn cursor-pointer" aria-label="Upload image" title="Upload image">
-            <i data-lucide="image-plus" class="w-4 h-4"></i>
-            <input type="file" id="tutor-img" accept="image/png,image/jpeg" class="hidden">
-          </label>
-          <label class="icon-btn cursor-pointer" aria-label="Upload document" title="Upload document (PDF/TXT)">
-            <i data-lucide="file-plus" class="w-4 h-4"></i>
-            <input type="file" id="tutor-doc" accept=".pdf,.txt,.docx" class="hidden">
-          </label>
-          <button id="tutor-clear" class="icon-btn ml-auto" aria-label="Clear" title="Clear"><i data-lucide="eraser" class="w-4 h-4"></i></button>
-          <button id="tutor-ask" class="btn btn-primary">
-            <i data-lucide="send" class="w-4 h-4"></i> <span data-i18n="tutor_ask">Ask AI</span>
-          </button>
+      <!-- quick topics -->
+      <div class="mt-6">
+        <div class="text-xs font-semibold text-mute mb-2">Quick searches</div>
+        <div class="flex flex-wrap gap-2">
+          <button class="chip glass hover:border-brand-blue cursor-pointer" onclick="quickSearch('Photosynthesis explained step by step')">Photosynthesis</button>
+          <button class="chip glass hover:border-brand-blue cursor-pointer" onclick="quickSearch('Newton laws of motion with examples')">Newton&#39;s laws</button>
+          <button class="chip glass hover:border-brand-blue cursor-pointer" onclick="quickSearch('How to solve quadratic equations')">Quadratic equations</button>
+          <button class="chip glass hover:border-brand-blue cursor-pointer" onclick="quickSearch('World War 2 summary for students')">World War 2</button>
+          <button class="chip glass hover:border-brand-blue cursor-pointer" onclick="quickSearch('English grammar tenses chart')">Grammar tenses</button>
+          <button class="chip glass hover:border-brand-blue cursor-pointer" onclick="quickSearch('Python programming basics tutorial')">Python basics</button>
         </div>
-        <p class="text-[11px] text-mute" data-i18n="tutor_hint">Tip: attach a photo of your homework or a PDF/TXT file and the tutor will read it.</p>
       </div>
 
-      <!-- response -->
-      <div class="lg:col-span-3 card p-5 sm:p-6 min-h-[420px] flex flex-col">
-        <div id="tutor-idle" class="flex-1 flex flex-col items-center justify-center text-center text-mute gap-3 py-10">
-          <div class="icon-tile w-16 h-16 bg-gradient-to-br from-brand-blue to-brand-violet"><i data-lucide="sparkles" class="w-8 h-8 text-white"></i></div>
-          <p class="text-sm max-w-xs" data-i18n="tutor_idle">Your step-by-step explanation will appear here once you ask a question.</p>
+      <!-- recent searches -->
+      <div id="recent-wrap" class="mt-6 hidden">
+        <div class="flex items-center justify-between mb-2">
+          <div class="text-xs font-semibold text-mute">Recent searches</div>
+          <button class="text-xs text-brand-blue hover:underline" onclick="clearRecentSearches()">Clear</button>
         </div>
-        <div id="tutor-loading" class="hidden flex-1 flex flex-col items-center justify-center gap-3 py-10">
-          <div class="spinner spinner-dark !w-8 !h-8"></div>
-          <p class="text-sm text-mute" data-i18n="common_loading">Thinking…</p>
-        </div>
-        <div id="tutor-error" class="hidden flex-1 flex flex-col items-center justify-center text-center gap-3 py-10">
-          <i data-lucide="triangle-alert" class="w-8 h-8 text-brand-amber"></i>
-          <p class="text-sm text-dim" id="tutor-error-msg">Something went wrong. Please try again.</p>
-        </div>
-        <div id="tutor-result" class="hidden flex-1 flex flex-col">
-          <div class="flex items-center justify-between mb-3 pb-3 border-b border-soft">
-            <span class="chip bg-brand-blue/15 text-brand-blue"><i data-lucide="circle-check" class="w-3.5 h-3.5"></i> Answer</span>
-            <div class="flex items-center gap-1.5">
-              <button class="icon-btn !w-8 !h-8" onclick="ttsRead('tutor-result-body')" title="Listen"><i data-lucide="volume-2" class="w-4 h-4"></i></button>
-              <button class="icon-btn !w-8 !h-8" onclick="copyText('tutor-result-body')" title="Copy"><i data-lucide="copy" class="w-4 h-4"></i></button>
-              <button class="icon-btn !w-8 !h-8" onclick="downloadText('tutor-result-body','learnsphere-answer.txt')" title="Download"><i data-lucide="download" class="w-4 h-4"></i></button>
-              <button class="icon-btn !w-8 !h-8" onclick="saveToNotes('tutor-result-body')" title="Save to notes"><i data-lucide="bookmark-plus" class="w-4 h-4"></i></button>
-              <button class="icon-btn !w-8 !h-8" onclick="askTutor(true)" title="Regenerate"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button>
-            </div>
-          </div>
-          <div id="tutor-result-body" class="prose-ai text-sm overflow-y-auto max-h-[420px] pr-1"></div>
-        </div>
+        <div id="recent-list" class="flex flex-wrap gap-2"></div>
       </div>
     </div>
   </div>
@@ -464,7 +417,7 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
       <div class="max-w-xl">
         <span class="chip glass text-brand-violet mb-4"><i data-lucide="wand-sparkles" class="w-3.5 h-3.5"></i> STUDY TOOLS</span>
         <h2 class="font-display text-3xl sm:text-4xl font-bold mb-3" data-i18n="tools_title">Smart study tools for every task</h2>
-        <p class="text-dim" data-i18n="tools_subtitle">Fifteen AI-powered tools to help you learn faster and score higher.</p>
+        <p class="text-dim">Fifteen one-click shortcuts that search the web for exactly what you need.</p>
       </div>
       <div class="relative">
         <i data-lucide="search" class="w-4 h-4 absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 text-mute"></i>
@@ -570,8 +523,8 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
       <span class="chip glass text-brand-pink mb-4"><i data-lucide="brain-circuit" class="w-3.5 h-3.5"></i> QUIZ</span>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-3" data-i18n="quiz_title">Test yourself with an AI quiz</h2>
-      <p class="text-dim" data-i18n="quiz_subtitle">Pick a subject and difficulty — the AI builds a fresh quiz every time.</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-3">Test yourself with a quick quiz</h2>
+      <p class="text-dim">Pick a subject — questions are shuffled from the built-in question bank every time.</p>
     </div>
 
     <div class="max-w-3xl mx-auto card p-6 sm:p-8" data-reveal>
@@ -583,12 +536,6 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
             <select id="quiz-subject" class="w-full rounded-xl px-3 py-2.5 text-sm">
               <option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option>
               <option>English</option><option>Computer Science</option><option>History</option><option>General Knowledge</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs text-mute font-semibold mb-1.5 block">Difficulty</label>
-            <select id="quiz-difficulty" class="w-full rounded-xl px-3 py-2.5 text-sm">
-              <option>Easy</option><option selected>Medium</option><option>Hard</option>
             </select>
           </div>
           <div>
@@ -607,12 +554,6 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
         <button id="quiz-start-btn" class="btn btn-primary w-full justify-center" onclick="startQuiz()">
           <i data-lucide="play" class="w-4 h-4"></i> <span data-i18n="quiz_start">Start Quiz</span>
         </button>
-      </div>
-
-      <!-- loading -->
-      <div id="quiz-loading" class="hidden flex-col items-center justify-center gap-3 py-16 text-center">
-        <div class="spinner spinner-dark !w-8 !h-8"></div>
-        <p class="text-sm text-mute">Building your quiz…</p>
       </div>
 
       <!-- active quiz -->
@@ -843,7 +784,6 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
         <a href="#" class="icon-btn" aria-label="LinkedIn"><i data-lucide="briefcase" class="w-4 h-4"></i></a>
         <a href="#" class="icon-btn" aria-label="YouTube"><i data-lucide="circle-play" class="w-4 h-4"></i></a>
       </div>
-      <button id="livechat-btn" class="btn btn-ghost mt-6"><i data-lucide="message-square-more" class="w-4 h-4"></i> Live Chat</button>
     </div>
     <div class="lg:col-span-3 card p-6 sm:p-8" data-reveal>
       <form id="contact-form" class="grid sm:grid-cols-2 gap-4" novalidate>
@@ -894,10 +834,10 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
       <div>
         <h4 class="font-semibold text-sm mb-4" data-i18n="nav_tools">Study Tools</h4>
         <ul class="space-y-2.5 text-sm text-mute">
+          <li><a href="#tutor" class="hover:text-[var(--text)]">Web Search</a></li>
           <li><a href="#tools" class="hover:text-[var(--text)]">Homework Solver</a></li>
           <li><a href="#tools" class="hover:text-[var(--text)]">Notes Generator</a></li>
-          <li><a href="#tools" class="hover:text-[var(--text)]">Quiz Generator</a></li>
-          <li><a href="#tools" class="hover:text-[var(--text)]">Flashcards</a></li>
+          <li><a href="#quiz" class="hover:text-[var(--text)]">Quiz</a></li>
         </ul>
       </div>
       <div>
@@ -1015,27 +955,10 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
     <div id="tool-modal-fields" class="space-y-3 mb-4"></div>
 
     <div class="flex items-center gap-2 mb-2">
-      <button id="tool-modal-run" class="btn btn-primary"><i data-lucide="sparkles" class="w-4 h-4"></i> <span data-i18n="tool_open">Generate</span></button>
+      <button id="tool-modal-run" class="btn btn-primary"><i data-lucide="arrow-up-right" class="w-4 h-4"></i> <span>Search the Web</span></button>
       <button class="btn btn-ghost btn-sm" onclick="closeTool()">Cancel</button>
     </div>
-
-    <div id="tool-modal-loading" class="hidden flex items-center gap-3 py-8 justify-center text-mute text-sm">
-      <div class="spinner spinner-dark"></div><span data-i18n="common_loading">Thinking…</span>
-    </div>
-    <div id="tool-modal-error" class="hidden py-6 text-center text-sm text-dim">
-      <i data-lucide="triangle-alert" class="w-6 h-6 text-brand-amber mx-auto mb-2"></i>
-      <span id="tool-modal-error-msg">Something went wrong. Please try again.</span>
-    </div>
-    <div id="tool-modal-result-wrap" class="hidden mt-3">
-      <div class="flex items-center justify-between mb-2 pb-2 border-b border-soft">
-        <span class="chip bg-brand-green/15 text-brand-green"><i data-lucide="check" class="w-3.5 h-3.5"></i> Result</span>
-        <div class="flex gap-1.5">
-          <button class="icon-btn !w-8 !h-8" onclick="copyText('tool-modal-result')" title="Copy"><i data-lucide="copy" class="w-4 h-4"></i></button>
-          <button class="icon-btn !w-8 !h-8" onclick="downloadText('tool-modal-result','learnsphere-result.txt')" title="Download"><i data-lucide="download" class="w-4 h-4"></i></button>
-        </div>
-      </div>
-      <div id="tool-modal-result" class="prose-ai text-sm max-h-[40vh] overflow-y-auto pr-1"></div>
-    </div>
+    <p class="text-[11px] text-mute">Opens a ready-made web search for this task in a new browser tab.</p>
   </div>
 </div>
 
@@ -1054,23 +977,7 @@ input:focus,textarea:focus,select:focus{ border-color:var(--grad-1); }
   <span id="toast-msg"></span>
 </div>
 
-<!-- Live chat widget -->
-<div id="livechat-panel" class="hidden fixed bottom-5 right-5 rtl:right-auto rtl:left-5 z-[150] w-80 max-w-[90vw] surface rounded-3xl shadow-glass overflow-hidden">
-  <div class="bg-gradient-to-r from-brand-blue to-brand-violet p-4 flex items-center justify-between">
-    <div class="flex items-center gap-2 text-white"><i data-lucide="headset" class="w-4 h-4"></i><span class="text-sm font-semibold">LearnSphere AI Assistant</span></div>
-    <button onclick="toggleLiveChat(false)" class="text-white/80 hover:text-white" aria-label="Close chat"><i data-lucide="x" class="w-4 h-4"></i></button>
-  </div>
-  <div class="p-4 text-sm text-dim h-64 overflow-y-auto" id="livechat-body">
-    <div class="glass rounded-xl p-2.5 mb-2 inline-block">Hi! 👋 I'm the LearnSphere AI assistant. Ask me about plans, features, or how any study tool works — I can help right now.</div>
-  </div>
-  <div class="p-3 border-t border-soft flex gap-2">
-    <input id="livechat-input" type="text" placeholder="Type a message…" class="flex-1 rounded-xl px-3 py-2 text-sm">
-    <button class="icon-btn" onclick="sendLiveChat()" aria-label="Send"><i data-lucide="send" class="w-4 h-4"></i></button>
-  </div>
-</div>
-<button id="livechat-fab" class="fixed bottom-5 right-5 rtl:right-auto rtl:left-5 z-[140] w-14 h-14 rounded-full bg-gradient-to-br from-brand-blue to-brand-violet shadow-glow flex items-center justify-center text-white" aria-label="Open live chat" onclick="toggleLiveChat()">
-  <i data-lucide="message-circle" class="w-6 h-6"></i>
-</button>
+
 
 <script>
 /* ============================================================
@@ -1110,16 +1017,16 @@ pt:{nav_home:"Início",nav_tutor:"Tutor de IA",nav_tools:"Ferramentas de estudo"
 
 /* ---------- content data ---------- */
 const TOOLS = [
- {id:'homework', icon:'square-check-big', grad:['from-brand-blue','to-brand-cyan'], title:'AI Homework Solver', desc:"Enter or upload a question and get a step-by-step solution.",
+ {id:'homework', icon:'square-check-big', grad:['from-brand-blue','to-brand-cyan'], title:'Homework Solver', desc:"Enter or upload a question and get a step-by-step solution.",
    fields:[{id:'q',type:'textarea',label:'Your question',placeholder:'Paste your homework question…'}],
    system:"You are a patient, encouraging homework tutor for school and college students. Solve the given problem with clear, numbered steps, then give a short final answer clearly marked at the end with **Final Answer:**. Keep the whole response concise and easy to scan."},
- {id:'notes', icon:'notebook-pen', grad:['from-brand-violet','to-brand-pink'], title:'AI Notes Generator', desc:"Generate clear notes from a topic, lesson, or transcript.",
+ {id:'notes', icon:'notebook-pen', grad:['from-brand-violet','to-brand-pink'], title:'Notes Generator', desc:"Generate clear notes from a topic, lesson, or transcript.",
    fields:[{id:'q',type:'textarea',label:'Topic or text',placeholder:'e.g. Cell division — mitosis and meiosis'}],
    system:"You are a study notes generator. Turn the given topic or text into well-structured, concise revision notes using short headings and bullet points. Bold key terms."},
- {id:'summarizer', icon:'file-text', grad:['from-brand-cyan','to-brand-green'], title:'AI Summarizer', desc:"Summarize long text, chapters, and class notes.",
+ {id:'summarizer', icon:'file-text', grad:['from-brand-cyan','to-brand-green'], title:'Summarizer', desc:"Summarize long text, chapters, and class notes.",
    fields:[{id:'q',type:'textarea',label:'Text to summarize',placeholder:'Paste your text here…'}],
    system:"Summarize the given text into a short paragraph followed by 4-6 key bullet points. Preserve the core meaning and stay concise."},
- {id:'quizgen', icon:'list-checks', grad:['from-brand-pink','to-brand-amber'], title:'AI Quiz Generator', desc:"Generate multiple-choice, true/false, and short-answer questions.",
+ {id:'quizgen', icon:'list-checks', grad:['from-brand-pink','to-brand-amber'], title:'Quiz Generator', desc:"Generate multiple-choice, true/false, and short-answer questions.",
    fields:[{id:'q',type:'text',label:'Topic',placeholder:'e.g. World War II'},{id:'n',type:'select',label:'Question type',options:['Multiple Choice','True/False','Short Answer','Descriptive']}],
    system:"Generate 5 quiz questions of the requested type on the given topic. Number them, and provide the correct answer clearly after each question."},
  {id:'flashcards', icon:'layers', grad:['from-brand-green','to-brand-cyan'], title:'Flashcard Generator', desc:"Create interactive flashcards from notes or a topic.",
@@ -1180,7 +1087,7 @@ const COURSES = [
  {title:'Accounting Basics', subject:'Accounting', instructor:'Fatima Noor', level:'Beginner', rating:4.6, lessons:20, duration:'8h', students:5400, progress:15, grad:['from-brand-cyan','to-brand-blue'], icon:'calculator'},
  {title:'Business Communication', subject:'Business Studies', instructor:'James Whitfield', level:'Intermediate', rating:4.7, lessons:18, duration:'7h', students:6700, progress:42, grad:['from-brand-violet','to-brand-blue'], icon:'briefcase'},
  {title:'Exam Preparation Bootcamp', subject:'General', instructor:'Priya Nair', level:'All Levels', rating:4.9, lessons:16, duration:'10h', students:18300, progress:0, grad:['from-brand-amber','to-brand-pink'], icon:'clipboard-check'},
- {title:'AI for Students', subject:'Computer Science', instructor:'Marcus Lee', level:'Beginner', rating:4.8, lessons:22, duration:'9h', students:9800, progress:0, grad:['from-brand-green','to-brand-cyan'], icon:'bot'},
+ {title:'for Students', subject:'Computer Science', instructor:'Marcus Lee', level:'Beginner', rating:4.8, lessons:22, duration:'9h', students:9800, progress:0, grad:['from-brand-green','to-brand-cyan'], icon:'bot'},
 ];
 
 const TESTIMONIALS = [
@@ -1253,7 +1160,7 @@ const LEGAL = {
 <p>You can control or delete cookies through your browser settings. Disabling non-essential cookies will not affect core functionality, but personalization and ad relevance may be reduced.</p>`},
  help: {title:'Help Center', body:`
 <p>Need a hand? Here are the fastest ways to get help:</p>
-<ul><li>Browse the <strong>FAQ</strong> section on this page for common questions.</li><li>Use the <strong>Live Chat</strong> button in the bottom corner for quick answers.</li><li>Email us at <strong>support@learnsphere.ai</strong> — we usually reply within 1–2 business days.</li><li>Schools and teachers can contact our sales team via the Contact form for onboarding help.</li></ul>`}
+<ul><li>Browse the <strong>FAQ</strong> section on this page for common questions.</li><li>Email us at <strong>support@learnsphere.ai</strong> — we usually reply within 1–2 business days.</li><li>Schools and teachers can contact our sales team via the Contact form for onboarding help.</li></ul>`}
 };
 
 /* ---------- state ---------- */
@@ -1271,6 +1178,8 @@ document.addEventListener('DOMContentLoaded', () => {
   buildLangMenu();
   applyLanguage(currentLang);
   lucide.createIcons();
+  renderSearchTabs();
+  renderRecentSearches();
   renderTools();
   renderSubjects();
   renderCourses();
@@ -1572,208 +1481,83 @@ function toggleAcc(btn){
 function initAccordionDelegation(){ /* using inline onclick; placeholder for future keyboard nav */ }
 
 /* ============================================================
-   CLAUDE API HELPER
-   Calls our own /api/chat serverless function (see api/chat.js),
-   which holds the real Anthropic API key server-side and forwards
-   the request. Nothing sensitive ever touches the browser.
-   The proxy gives Claude access to web search, so responses may
-   include citations — we extract those into a deduped source list.
+   WEB SEARCH
+   Everything runs client-side: the selected engine opens in a
+   new browser tab. No API keys, no backend required.
    ============================================================ */
 function escapeHtml(str){
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-async function askClaude(system, userContent){
-  try{
-    // If userContent is already a full multi-turn messages array (each item has a "role"),
-    // send it as-is so callers like the live chat can preserve conversation history.
-    // Otherwise wrap it as a single user turn (string or content-block array).
-    const messages = (Array.isArray(userContent) && userContent.length && userContent[0] && userContent[0].role)
-      ? userContent
-      : [{ role: "user", content: userContent }];
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ system, messages })
-    });
-    const rawBody = await response.text();
-    let data;
-    try{
-      data = JSON.parse(rawBody);
-    }catch(parseErr){
-      throw new Error(`/api/chat returned a non-JSON response (HTTP ${response.status}), which usually means that route isn't deployed as a serverless function — check that api/chat.js exists in your repo and redeploy.`);
-    }
-    if(!response.ok) throw new Error((data && data.error) || ('API error '+response.status));
-    const textBlocks = (data.content||[]).filter(b=>b.type==='text');
-    const text = textBlocks.map(b=>b.text).join('\n').trim();
-    if(!text) throw new Error('Empty response');
-    // Collect unique, safe (http/https only) source links from any web search citations
-    const seen = new Set();
-    const sources = [];
-    textBlocks.forEach(b=>{
-      (b.citations||[]).forEach(c=>{
-        if(c.url && /^https?:\/\//i.test(c.url) && !seen.has(c.url)){
-          seen.add(c.url);
-          sources.push({ url:c.url, title:c.title || c.url });
-        }
-      });
-    });
-    return { ok:true, text, sources };
-  }catch(err){
-    console.warn('askClaude failed', err);
-    return { ok:false, error: err.message };
-  }
-}
-function renderSources(sources){
-  if(!sources || sources.length===0) return '';
-  return `<div class="mt-4 pt-3 border-t border-soft"><div class="text-xs font-semibold text-mute mb-2">Sources</div><ul class="space-y-1">${sources.map(s=>`<li><a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-brand-blue hover:underline block truncate">${escapeHtml(s.title)}</a></li>`).join('')}</ul></div>`;
-}
+const SEARCH_ENGINES = [
+  { id:'google',    name:'Google',         icon:'search',        url:'https://www.google.com/search?q=' },
+  { id:'bing',      name:'Bing',           icon:'compass',       url:'https://www.bing.com/search?q=' },
+  { id:'ddg',       name:'DuckDuckGo',     icon:'shield',        url:'https://duckduckgo.com/?q=' },
+  { id:'youtube',   name:'YouTube',        icon:'play',          url:'https://www.youtube.com/results?search_query=' },
+  { id:'wikipedia', name:'Wikipedia',      icon:'book-open',     url:'https://en.wikipedia.org/w/index.php?search=' },
+  { id:'scholar',   name:'Google Scholar', icon:'graduation-cap',url:'https://scholar.google.com/scholar?q=' },
+];
+let currentEngine = localStorage.getItem('ls_engine') || 'google';
+if(!SEARCH_ENGINES.find(en=>en.id===currentEngine)) currentEngine = 'google';
+let recentSearches = JSON.parse(localStorage.getItem('ls_recent_searches') || '[]');
 
-/* Very small markdown-ish renderer: bold, headings, bullet/numbered lists, line breaks */
-function renderAIText(raw){
-  let html = raw
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/^### (.*)$/gm,'<h3>$1</h3>')
-    .replace(/^## (.*)$/gm,'<h3>$1</h3>')
-    .replace(/^# (.*)$/gm,'<h3>$1</h3>')
-    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-  // lists
-  const lines = html.split('\n');
-  let out = []; let inUl=false, inOl=false;
-  for(let line of lines){
-    const ulMatch = line.match(/^\s*[-*•]\s+(.*)/);
-    const olMatch = line.match(/^\s*\d+[\.\)]\s+(.*)/);
-    if(ulMatch){ if(!inUl){ out.push('<ul>'); inUl=true; } if(inOl){ out.push('</ol>'); inOl=false; } out.push('<li>'+ulMatch[1]+'</li>'); continue; }
-    if(olMatch){ if(!inOl){ out.push('<ol>'); inOl=true; } if(inUl){ out.push('</ul>'); inUl=false; } out.push('<li>'+olMatch[1]+'</li>'); continue; }
-    if(inUl){ out.push('</ul>'); inUl=false; }
-    if(inOl){ out.push('</ol>'); inOl=false; }
-    if(line.trim()==='') out.push('<br>'); else out.push('<p>'+line+'</p>');
-  }
-  if(inUl) out.push('</ul>'); if(inOl) out.push('</ol>');
-  return out.join('');
-}
-
-function fileToBase64(file){
-  return new Promise((resolve,reject)=>{
-    const r = new FileReader();
-    r.onload = () => resolve(r.result.split(',')[1]);
-    r.onerror = () => reject(new Error('File read failed'));
-    r.readAsDataURL(file);
-  });
-}
-function textFileToString(file){
-  return new Promise((resolve,reject)=>{
-    const r = new FileReader();
-    r.onload = () => resolve(r.result);
-    r.onerror = () => reject(new Error('File read failed'));
-    r.readAsText(file);
-  });
-}
-
-/* ============================================================
-   AI TUTOR
-   ============================================================ */
-let tutorAttachment = null; // {kind:'image'|'pdf'|'text', data, mime, name}
-
-document.getElementById('tutor-img').addEventListener('change', async function(){
-  const file = this.files[0]; if(!file) return;
-  if(file.size > 8*1024*1024){ showToast('Image is too large (max 8MB).', 'error'); this.value=''; return; }
-  const base64 = await fileToBase64(file);
-  tutorAttachment = { kind:'image', data: base64, mime: file.type, name: file.name };
-  showFilePreview(file.name, 'image');
-});
-document.getElementById('tutor-doc').addEventListener('change', async function(){
-  const file = this.files[0]; if(!file) return;
-  if(file.size > 8*1024*1024){ showToast('File is too large (max 8MB).', 'error'); this.value=''; return; }
-  if(file.name.toLowerCase().endsWith('.docx')){
-    showToast('DOCX preview is not supported in this demo — please paste the text instead.', 'error');
-    this.value=''; return;
-  }
-  if(file.type === 'application/pdf'){
-    const base64 = await fileToBase64(file);
-    tutorAttachment = { kind:'pdf', data: base64, mime:'application/pdf', name: file.name };
-  } else {
-    const text = await textFileToString(file);
-    tutorAttachment = { kind:'text', data: text.slice(0,6000), mime:'text/plain', name: file.name };
-  }
-  showFilePreview(file.name, 'doc');
-});
-function showFilePreview(name, kind){
-  const wrap = document.getElementById('tutor-file-preview');
-  wrap.classList.remove('hidden'); wrap.classList.add('flex');
-  wrap.innerHTML = `<span class="chip glass"><i data-lucide="${kind==='image'?'image':'file-text'}" class="w-3.5 h-3.5"></i>${name}<button onclick="clearTutorAttachment()" class="ml-1 rtl:ml-0 rtl:mr-1" aria-label="Remove file"><i data-lucide="x" class="w-3.5 h-3.5"></i></button></span>`;
+function renderSearchTabs(){
+  const wrap = document.getElementById('search-tabs');
+  if(!wrap) return;
+  wrap.innerHTML = SEARCH_ENGINES.map(en=>`
+    <button role="tab" aria-selected="${en.id===currentEngine}" data-engine="${en.id}"
+      class="chip cursor-pointer transition-colors ${en.id===currentEngine ? 'bg-brand-blue text-white' : 'glass text-[var(--text-dim)] hover:text-[var(--text)]'}"
+      onclick="setSearchEngine('${en.id}')">
+      <i data-lucide="${en.icon}" class="w-3.5 h-3.5"></i> ${en.name}
+    </button>`).join('');
+  const goLabel = document.getElementById('search-go-label');
+  const eng = SEARCH_ENGINES.find(en=>en.id===currentEngine);
+  if(goLabel && eng) goLabel.textContent = 'Search ' + eng.name;
   lucide.createIcons();
 }
-function clearTutorAttachment(){
-  tutorAttachment = null;
-  document.getElementById('tutor-img').value=''; document.getElementById('tutor-doc').value='';
-  const wrap = document.getElementById('tutor-file-preview');
-  wrap.classList.add('hidden'); wrap.innerHTML='';
+function setSearchEngine(id){
+  currentEngine = id;
+  localStorage.setItem('ls_engine', id);
+  renderSearchTabs();
 }
-document.getElementById('tutor-clear').addEventListener('click', ()=>{
-  document.getElementById('tutor-input').value='';
-  clearTutorAttachment();
-  setTutorState('idle');
+function openSearch(query, engineId){
+  const eng = SEARCH_ENGINES.find(en=>en.id===(engineId||currentEngine)) || SEARCH_ENGINES[0];
+  window.open(eng.url + encodeURIComponent(query), '_blank', 'noopener');
+}
+function runWebSearch(){
+  const input = document.getElementById('search-input');
+  const q = input.value.trim();
+  if(!q){ showToast('Please type something to search for.', 'error'); return; }
+  recentSearches = [q, ...recentSearches.filter(x=>x!==q)].slice(0,8);
+  localStorage.setItem('ls_recent_searches', JSON.stringify(recentSearches));
+  renderRecentSearches();
+  openSearch(q);
+}
+function quickSearch(q){
+  const input = document.getElementById('search-input');
+  if(input) input.value = q;
+  runWebSearch();
+}
+function renderRecentSearches(){
+  const wrap = document.getElementById('recent-wrap');
+  const list = document.getElementById('recent-list');
+  if(!wrap || !list) return;
+  if(recentSearches.length===0){ wrap.classList.add('hidden'); return; }
+  wrap.classList.remove('hidden');
+  list.innerHTML = recentSearches.map(q=>`
+    <button class="chip glass hover:border-brand-blue cursor-pointer" onclick="quickSearch('${escapeHtml(q).replace(/'/g,"\\'")}')">
+      <i data-lucide="history" class="w-3.5 h-3.5"></i> ${escapeHtml(q.length>34 ? q.slice(0,34)+'…' : q)}
+    </button>`).join('');
+  lucide.createIcons();
+}
+function clearRecentSearches(){
+  recentSearches = [];
+  localStorage.removeItem('ls_recent_searches');
+  renderRecentSearches();
+  showToast('Recent searches cleared.', 'success');
+}
+document.getElementById('search-input')?.addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){ e.preventDefault(); runWebSearch(); }
 });
-
-/* Mic (Web Speech API) */
-document.getElementById('tutor-mic').addEventListener('click', function(){
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SR){ showToast('Voice input is not supported in this browser.', 'error'); return; }
-  const rec = new SR();
-  rec.lang = 'en-US'; rec.interimResults = false;
-  this.classList.add('animate-wiggle');
-  rec.onresult = (e)=>{ document.getElementById('tutor-input').value += (document.getElementById('tutor-input').value?' ':'') + e.results[0][0].transcript; };
-  rec.onend = ()=> this.classList.remove('animate-wiggle');
-  rec.onerror = ()=> { this.classList.remove('animate-wiggle'); showToast('Could not capture audio.', 'error'); };
-  rec.start();
-});
-
-function setTutorState(state, msg, detail){
-  ['idle','loading','error','result'].forEach(s=>document.getElementById('tutor-'+s).classList.add('hidden'));
-  document.getElementById('tutor-'+state).classList.remove('hidden');
-  if(state==='error'){
-    const el = document.getElementById('tutor-error-msg');
-    el.innerHTML = escapeHtml(msg || 'Something went wrong. Please try again.') +
-      (detail ? `<br><span class="text-xs text-mute mt-1.5 inline-block font-mono-num">Technical detail: ${escapeHtml(detail)}</span>` : '');
-  }
-}
-document.getElementById('tutor-ask').addEventListener('click', ()=>askTutor(false));
-async function askTutor(regenerate){
-  const q = document.getElementById('tutor-input').value.trim();
-  if(!q && !tutorAttachment){ showToast('Please type a question or attach a file.', 'error'); return; }
-  const subject = document.getElementById('tutor-subject').value;
-  const level = document.getElementById('tutor-level').value;
-  const language = document.getElementById('tutor-language').value;
-  const difficulty = document.getElementById('tutor-difficulty').value;
-
-  setTutorState('loading');
-  const system = `You are LearnSphere AI's expert tutor for ${subject} at ${level} level, difficulty: ${difficulty}. Respond in ${language}. Structure your answer with: a short step-by-step explanation, a simple one-line summary, and (if relevant) one short example. Keep the whole answer concise and well formatted with **bold** for key terms. If the question depends on current events, recent data, or anything that may have changed since your training, use web search rather than guessing. Do not mention that you are Claude or an AI model by name.`;
-
-  let content;
-  if(tutorAttachment && tutorAttachment.kind==='image'){
-    content = [
-      { type:'image', source:{ type:'base64', media_type: tutorAttachment.mime, data: tutorAttachment.data } },
-      { type:'text', text: q || 'Please solve/explain the question shown in this image.' }
-    ];
-  } else if(tutorAttachment && tutorAttachment.kind==='pdf'){
-    content = [
-      { type:'document', source:{ type:'base64', media_type:'application/pdf', data: tutorAttachment.data } },
-      { type:'text', text: q || 'Please read this document and answer/explain based on it.' }
-    ];
-  } else if(tutorAttachment && tutorAttachment.kind==='text'){
-    content = `Attached file "${tutorAttachment.name}" content:\n${tutorAttachment.data}\n\nQuestion: ${q || 'Please explain/summarize the attached content.'}`;
-  } else {
-    content = q;
-  }
-
-  const res = await askClaude(system, content);
-  if(res.ok){
-    document.getElementById('tutor-result-body').innerHTML = renderAIText(res.text) + renderSources(res.sources);
-    setTutorState('result');
-  } else {
-    setTutorState('error', "The AI tutor couldn't respond right now. Here's a quick offline tip: break the problem into smaller steps, identify what's given vs. what's asked, and try a simpler example first. Please try again in a moment.", res.error);
-  }
-}
 
 /* copy / download / tts / save-to-notes helpers (shared) */
 function copyText(elId){
@@ -1807,7 +1591,7 @@ function saveToNotes(elId){
 function renderDashNotes(){
   const wrap = document.getElementById('dash-notes');
   if(!wrap) return;
-  if(savedNotes.length===0){ wrap.innerHTML = `<div class="glass rounded-lg px-3 py-2 italic text-mute">Notes you save from the AI Tutor will appear here.</div>`; return; }
+  if(savedNotes.length===0){ wrap.innerHTML = `<div class="glass rounded-lg px-3 py-2 italic text-mute">Notes you save will appear here.</div>`; return; }
   wrap.innerHTML = savedNotes.slice(0,4).map(n=>`<div class="glass rounded-lg px-3 py-2"><div class="line-clamp-2">${n.text}</div><div class="text-[10px] text-mute mt-1">${n.date}</div></div>`).join('');
 }
 
@@ -1827,9 +1611,6 @@ function openTool(id){
     if(f.type==='select') return `<div><label class="text-xs text-mute font-semibold mb-1.5 block">${f.label}</label><select id="tf-${f.id}" class="w-full rounded-xl px-3.5 py-2.5 text-sm">${f.options.map(o=>`<option>${o}</option>`).join('')}</select></div>`;
     return `<div><label class="text-xs text-mute font-semibold mb-1.5 block">${f.label}</label><input id="tf-${f.id}" type="text" class="w-full rounded-xl px-3.5 py-2.5 text-sm" placeholder="${f.placeholder||''}"></div>`;
   }).join('');
-  document.getElementById('tool-modal-loading').classList.add('hidden');
-  document.getElementById('tool-modal-error').classList.add('hidden');
-  document.getElementById('tool-modal-result-wrap').classList.add('hidden');
   document.getElementById('tool-overlay').classList.remove('hidden');
   document.body.style.overflow='hidden';
   lucide.createIcons();
@@ -1840,75 +1621,122 @@ function closeTool(){
   document.body.style.overflow='';
   currentTool = null;
 }
-document.getElementById('tool-modal-run').addEventListener('click', async ()=>{
+const TOOL_SEARCH = {
+  homework:    (q,n)=>({ q:`step by step solution: ${q}` }),
+  notes:       (q,n)=>({ q:`revision notes summary: ${q}` }),
+  summarizer:  (q,n)=>({ q:`summary of ${q}` }),
+  quizgen:     (q,n)=>({ q:`${n||'multiple choice'} quiz questions with answers on ${q}` }),
+  flashcards:  (q,n)=>({ q:`flashcards for ${q}` }),
+  grammar:     (q,n)=>({ q:`grammar check rules: ${q}` }),
+  essay:       (q,n)=>({ q:`essay ${n||'outline'} on ${q}` }),
+  mathsolver:  (q,n)=>({ q:`solve math problem step by step: ${q}` }),
+  science:     (q,n)=>({ q:`science explanation for students: ${q}` }),
+  translator:  (q,n)=>({ url:`https://translate.google.com/?sl=auto&tl=en&text=${encodeURIComponent(q)}&op=translate` }),
+  citation:    (q,n)=>({ q:`${n||'APA'} citation format for: ${q}` }),
+  planner:     (q,n)=>({ q:`study plan timetable for ${q}` }),
+  presentation:(q,n)=>({ q:`presentation outline slides for ${q}` }),
+  paper:       (q,n)=>({ q:`past exam question papers ${q}` }),
+  examprep:    (q,n)=>({ q:`exam preparation guide tips for ${q}` }),
+};
+document.getElementById('tool-modal-run').addEventListener('click', ()=>{
   if(!currentTool) return;
   const values = {};
   currentTool.fields.forEach(f=>{ values[f.id] = document.getElementById('tf-'+f.id).value.trim(); });
   if(!values.q){ showToast('Please fill in the required field.', 'error'); return; }
-  let prompt = `Request: ${values.q}`;
-  if(values.n) prompt += `\nOption: ${values.n}`;
-  prompt += `\nRespond in ${document.getElementById('tutor-language') ? document.getElementById('tutor-language').value : 'English'}.`;
-
-  document.getElementById('tool-modal-loading').classList.remove('hidden');
-  document.getElementById('tool-modal-error').classList.add('hidden');
-  document.getElementById('tool-modal-result-wrap').classList.add('hidden');
-
-  const res = await askClaude(currentTool.system, prompt);
-  document.getElementById('tool-modal-loading').classList.add('hidden');
-  if(res.ok){
-    document.getElementById('tool-modal-result').innerHTML = renderAIText(res.text) + renderSources(res.sources);
-    document.getElementById('tool-modal-result-wrap').classList.remove('hidden');
-  } else {
-    document.getElementById('tool-modal-error-msg').innerHTML = "This tool couldn't reach the AI right now. Please check your connection and try again in a moment." +
-      (res.error ? `<br><span class="text-xs text-mute mt-1.5 inline-block font-mono-num">Technical detail: ${escapeHtml(res.error)}</span>` : '');
-    document.getElementById('tool-modal-error').classList.remove('hidden');
-  }
-  lucide.createIcons();
+  const build = TOOL_SEARCH[currentTool.id] || ((q,n)=>({ q:`${currentTool.title.replace(/^AI /,'')}: ${q}` }));
+  const target = build(values.q, values.n);
+  if(target.url){ window.open(target.url, '_blank', 'noopener'); }
+  else { openSearch(target.q, 'google'); }
+  closeTool();
+  showToast('Opened your search in a new tab.', 'success');
 });
 
 /* ============================================================
    QUIZ
    ============================================================ */
-const QUIZ_FALLBACK = {
-  Mathematics:[{q:"What is the value of x in 2x + 4 = 12?",options:["2","4","6","8"],correct:1,explanation:"2x = 8, so x = 4."},{q:"What is the area of a circle with radius r?",options:["2πr","πr²","πd","r²"],correct:1,explanation:"Area of a circle = πr²."},{q:"What is the square root of 81?",options:["7","8","9","10"],correct:2,explanation:"9 × 9 = 81."}],
-  Physics:[{q:"What is the SI unit of force?",options:["Joule","Newton","Watt","Pascal"],correct:1,explanation:"Force is measured in Newtons (N)."},{q:"What is the acceleration due to gravity on Earth (approx)?",options:["9.8 m/s²","3.6 m/s²","10.8 m/s²","1 m/s²"],correct:0,explanation:"Standard gravity is about 9.8 m/s²."},{q:"Which law states 'for every action there is an equal and opposite reaction'?",options:["Newton's 1st law","Newton's 2nd law","Newton's 3rd law","Law of gravitation"],correct:2,explanation:"This is Newton's Third Law of Motion."}],
-  General:[{q:"Which planet is known as the Red Planet?",options:["Venus","Mars","Jupiter","Saturn"],correct:1,explanation:"Mars appears red due to iron oxide on its surface."},{q:"What is the capital of Japan?",options:["Seoul","Beijing","Tokyo","Bangkok"],correct:2,explanation:"Tokyo is the capital of Japan."},{q:"How many continents are there?",options:["5","6","7","8"],correct:2,explanation:"There are 7 continents."}],
+const QUIZ_BANK = {
+  Mathematics:[
+    {q:"What is the value of x in 2x + 4 = 12?",options:["2","4","6","8"],correct:1,explanation:"2x = 8, so x = 4."},
+    {q:"What is the area of a circle with radius r?",options:["2\u03c0r","\u03c0r\u00b2","\u03c0d","r\u00b2"],correct:1,explanation:"Area of a circle = \u03c0r\u00b2."},
+    {q:"What is the square root of 81?",options:["7","8","9","10"],correct:2,explanation:"9 \u00d7 9 = 81."},
+    {q:"What is 15% of 200?",options:["20","25","30","35"],correct:2,explanation:"0.15 \u00d7 200 = 30."},
+    {q:"Which of these is a prime number?",options:["21","27","29","33"],correct:2,explanation:"29 has no divisors other than 1 and itself."},
+    {q:"The sum of angles in a triangle is…",options:["90\u00b0","180\u00b0","270\u00b0","360\u00b0"],correct:1,explanation:"Interior angles of a triangle always sum to 180\u00b0."},
+    {q:"What is 7 \u00d7 8?",options:["54","56","63","64"],correct:1,explanation:"7 \u00d7 8 = 56."},
+    {q:"If a = 3 and b = 4, what is \u221a(a\u00b2 + b\u00b2)?",options:["5","6","7","12"],correct:0,explanation:"\u221a(9+16) = \u221a25 = 5 (Pythagoras)."}],
+  Physics:[
+    {q:"What is the SI unit of force?",options:["Joule","Newton","Watt","Pascal"],correct:1,explanation:"Force is measured in Newtons (N)."},
+    {q:"What is the acceleration due to gravity on Earth (approx)?",options:["9.8 m/s\u00b2","3.6 m/s\u00b2","10.8 m/s\u00b2","1 m/s\u00b2"],correct:0,explanation:"Standard gravity is about 9.8 m/s\u00b2."},
+    {q:"Which law states 'for every action there is an equal and opposite reaction'?",options:["Newton's 1st law","Newton's 2nd law","Newton's 3rd law","Law of gravitation"],correct:2,explanation:"This is Newton's Third Law of Motion."},
+    {q:"What is the speed of light in a vacuum (approx)?",options:["300,000 km/s","150,000 km/s","3,000 km/s","30,000 km/s"],correct:0,explanation:"Light travels at roughly 3\u00d710\u2078 m/s = 300,000 km/s."},
+    {q:"Which quantity is measured in Hertz?",options:["Energy","Frequency","Power","Pressure"],correct:1,explanation:"Hertz (Hz) measures cycles per second — frequency."},
+    {q:"What form of energy does a stretched spring store?",options:["Kinetic","Thermal","Elastic potential","Chemical"],correct:2,explanation:"A stretched or compressed spring stores elastic potential energy."}],
+  Chemistry:[
+    {q:"What is the chemical symbol for gold?",options:["Go","Gd","Au","Ag"],correct:2,explanation:"Gold's symbol Au comes from the Latin 'aurum'."},
+    {q:"What is the pH of pure water?",options:["5","6","7","8"],correct:2,explanation:"Pure water is neutral with pH 7."},
+    {q:"Which gas do plants absorb during photosynthesis?",options:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],correct:2,explanation:"Plants take in CO\u2082 and release oxygen."},
+    {q:"What particle has a negative charge?",options:["Proton","Neutron","Electron","Photon"],correct:2,explanation:"Electrons carry a negative charge."},
+    {q:"H\u2082O is the chemical formula for…",options:["Hydrogen peroxide","Water","Salt","Ammonia"],correct:1,explanation:"Two hydrogen atoms + one oxygen atom = water."},
+    {q:"Which element has atomic number 6?",options:["Oxygen","Carbon","Nitrogen","Boron"],correct:1,explanation:"Carbon has 6 protons, so its atomic number is 6."}],
+  Biology:[
+    {q:"What is the powerhouse of the cell?",options:["Nucleus","Ribosome","Mitochondria","Chloroplast"],correct:2,explanation:"Mitochondria produce the cell's energy (ATP)."},
+    {q:"Which blood cells fight infection?",options:["Red blood cells","White blood cells","Platelets","Plasma"],correct:1,explanation:"White blood cells are part of the immune system."},
+    {q:"DNA stands for…",options:["Deoxyribonucleic acid","Dinucleic acid","Deoxyribose nitrate","Double nucleic acid"],correct:0,explanation:"DNA = deoxyribonucleic acid."},
+    {q:"Which organ pumps blood around the body?",options:["Lungs","Liver","Heart","Kidneys"],correct:2,explanation:"The heart is the body's pump."},
+    {q:"Photosynthesis mainly happens in which part of a plant cell?",options:["Mitochondria","Chloroplast","Nucleus","Cell wall"],correct:1,explanation:"Chloroplasts contain chlorophyll for photosynthesis."},
+    {q:"How many chambers does the human heart have?",options:["2","3","4","5"],correct:2,explanation:"The heart has 4 chambers: 2 atria and 2 ventricles."}],
+  English:[
+    {q:"Which of these is a noun?",options:["Quickly","Happiness","Run","Blue"],correct:1,explanation:"'Happiness' names a thing (an abstract noun)."},
+    {q:"What is the past tense of 'go'?",options:["Goed","Gone","Went","Going"],correct:2,explanation:"'Went' is the simple past of 'go'."},
+    {q:"Which sentence is correct?",options:["She don't like tea.","She doesn't likes tea.","She doesn't like tea.","She not like tea."],correct:2,explanation:"Third-person singular: doesn't + base verb."},
+    {q:"A word that describes a verb is called an…",options:["Adjective","Adverb","Article","Antonym"],correct:1,explanation:"Adverbs modify verbs, adjectives, or other adverbs."},
+    {q:"Which word is a synonym of 'happy'?",options:["Sad","Angry","Joyful","Tired"],correct:2,explanation:"'Joyful' means the same as 'happy'."},
+    {q:"What punctuation ends a question?",options:["Period","Comma","Exclamation mark","Question mark"],correct:3,explanation:"Questions end with a question mark (?)."}],
+  "Computer Science":[
+    {q:"What does CPU stand for?",options:["Central Processing Unit","Computer Personal Unit","Central Program Utility","Core Processing Unit"],correct:0,explanation:"CPU = Central Processing Unit, the computer's 'brain'."},
+    {q:"Which of these is a programming language?",options:["HTTP","Python","HTML5 spec","USB"],correct:1,explanation:"Python is a general-purpose programming language."},
+    {q:"Binary uses which two digits?",options:["0 and 1","1 and 2","0 and 9","1 and 10"],correct:0,explanation:"Binary is base-2: only 0 and 1."},
+    {q:"What does RAM stand for?",options:["Read Access Memory","Random Access Memory","Run All Memory","Rapid Action Module"],correct:1,explanation:"RAM = Random Access Memory, the computer's working memory."},
+    {q:"Which one is a loop in most languages?",options:["if","for","var","case"],correct:1,explanation:"'for' repeats a block of code — a loop."},
+    {q:"What does 'www' stand for?",options:["World Wide Web","Web World Wide","Wide Web World","World Web Way"],correct:0,explanation:"www = World Wide Web."}],
+  History:[
+    {q:"In which year did World War II end?",options:["1943","1944","1945","1946"],correct:2,explanation:"WWII ended in 1945."},
+    {q:"Who was the first President of the United States?",options:["Abraham Lincoln","George Washington","Thomas Jefferson","John Adams"],correct:1,explanation:"George Washington served 1789\u20131797."},
+    {q:"The ancient pyramids of Giza are in which country?",options:["Iraq","Greece","Egypt","Mexico"],correct:2,explanation:"The Giza pyramid complex is near Cairo, Egypt."},
+    {q:"Pakistan gained independence in which year?",options:["1945","1946","1947","1948"],correct:2,explanation:"Pakistan became independent on 14 August 1947."},
+    {q:"Who is known for the theory of relativity?",options:["Isaac Newton","Albert Einstein","Galileo Galilei","Nikola Tesla"],correct:1,explanation:"Albert Einstein published the theory of relativity."},
+    {q:"The Great Wall is located in…",options:["Japan","India","China","Korea"],correct:2,explanation:"The Great Wall of China stretches thousands of kilometres."}],
+  "General Knowledge":[
+    {q:"Which planet is known as the Red Planet?",options:["Venus","Mars","Jupiter","Saturn"],correct:1,explanation:"Mars appears red due to iron oxide on its surface."},
+    {q:"What is the capital of Japan?",options:["Seoul","Beijing","Tokyo","Bangkok"],correct:2,explanation:"Tokyo is the capital of Japan."},
+    {q:"How many continents are there?",options:["5","6","7","8"],correct:2,explanation:"There are 7 continents."},
+    {q:"What is the largest ocean on Earth?",options:["Atlantic","Indian","Arctic","Pacific"],correct:3,explanation:"The Pacific Ocean is the largest and deepest."},
+    {q:"How many days are in a leap year?",options:["364","365","366","367"],correct:2,explanation:"A leap year has 366 days (extra day in February)."},
+    {q:"Which is the longest river in the world?",options:["Amazon","Nile","Yangtze","Mississippi"],correct:1,explanation:"The Nile is commonly cited as the longest river."}],
 };
+QUIZ_BANK.General = QUIZ_BANK["General Knowledge"];
 let quizState = { questions:[], index:0, answers:[], timer:0, timerInterval:null, timePerQ:30 };
 
-async function startQuiz(){
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function startQuiz(){
   const subject = document.getElementById('quiz-subject').value;
-  const difficulty = document.getElementById('quiz-difficulty').value;
   const count = parseInt(document.getElementById('quiz-count').value,10);
   quizState.timePerQ = parseInt(document.getElementById('quiz-timer').value,10);
 
-  document.getElementById('quiz-setup').classList.add('hidden');
-  document.getElementById('quiz-loading').classList.remove('hidden');
-  document.getElementById('quiz-loading').classList.add('flex');
-
-  const system = `You generate quiz questions for students. Respond ONLY with valid minified JSON, no markdown, no code fences, no commentary. Format: [{"q":"question text","options":["A","B","C","D"],"correct":0,"explanation":"short explanation"}]. Provide exactly ${count} questions on the given topic at the given difficulty. "correct" is the zero-based index of the right option in "options".`;
-  const res = await askClaude(system, `Subject: ${subject}. Difficulty: ${difficulty}. Number of questions: ${count}.`);
-
-  let questions = null;
-  if(res.ok){
-    try{
-      let raw = res.text.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
-      const parsed = JSON.parse(raw);
-      if(Array.isArray(parsed) && parsed.length>0) questions = parsed.slice(0,count);
-    }catch(e){ console.warn('Quiz JSON parse failed, using fallback', e); }
-  }
-  if(!questions){
-    const bank = QUIZ_FALLBACK[subject] || QUIZ_FALLBACK.General;
-    questions = [];
-    for(let i=0;i<count;i++) questions.push(bank[i % bank.length]);
-  }
+  const bank = QUIZ_BANK[subject] || QUIZ_BANK["General Knowledge"];
+  const pool = shuffleArray(bank);
+  const questions = [];
+  for(let i=0;i<count;i++) questions.push(pool[i % pool.length]);
 
   quizState.questions = questions;
   quizState.index = 0;
   quizState.answers = new Array(questions.length).fill(null);
 
-  document.getElementById('quiz-loading').classList.add('hidden');
-  document.getElementById('quiz-loading').classList.remove('flex');
+  document.getElementById('quiz-setup').classList.add('hidden');
   document.getElementById('quiz-active').classList.remove('hidden');
   renderQuizDots();
   showQuizQuestion();
@@ -2145,62 +1973,6 @@ function showToast(msg, type='info'){
   toastTimer = setTimeout(()=>{ toast.style.transform='translateY(6rem)'; toast.style.opacity='0'; }, 3800);
 }
 
-/* ============================================================
-   LIVE CHAT (demo)
-   ============================================================ */
-function toggleLiveChat(force){
-  const panel = document.getElementById('livechat-panel');
-  const show = force!==undefined ? force : panel.classList.contains('hidden');
-  panel.classList.toggle('hidden', !show);
-  document.getElementById('livechat-fab').classList.toggle('hidden', show);
-}
-document.getElementById('livechat-btn')?.addEventListener('click', ()=>toggleLiveChat(true));
-
-/* Live chat is a real AI support agent (askClaude), not a canned reply.
-   It keeps short conversation history so follow-up questions have context. */
-let livechatHistory = [];
-let livechatBusy = false;
-const LIVECHAT_SYSTEM = `You are the friendly, concise live-chat support assistant for LearnSphere AI, an AI-powered study platform. You can help with: how the AI Tutor works, the 15 study tools (homework solver, notes generator, summarizer, quiz generator, flashcards, grammar checker, essay writer, math solver, science assistant, translator, citation generator, study planner, presentation generator, question paper generator, exam prep assistant), supported languages (12, including RTL for Urdu/Arabic), and general study advice. Keep replies short (2-4 sentences), warm, and helpful, in plain text (no markdown headers). If asked about pricing or billing, let them know the team will follow up by email via the contact form. Do not mention that you are Claude or an AI model by name.`;
-
-function appendLivechatBubble(text, fromUser){
-  const body = document.getElementById('livechat-body');
-  const bubble = fromUser
-    ? `<div class="flex justify-end mb-2"><div class="bg-gradient-to-r from-brand-blue to-brand-violet text-white rounded-xl p-2.5 inline-block max-w-[80%]">${text}</div></div>`
-    : `<div class="glass rounded-xl p-2.5 mb-2 inline-block max-w-[80%]">${text}</div>`;
-  body.insertAdjacentHTML('beforeend', bubble);
-  body.scrollTop = body.scrollHeight;
-}
-function setLivechatTyping(show){
-  const body = document.getElementById('livechat-body');
-  let el = document.getElementById('livechat-typing');
-  if(show){
-    if(el) return;
-    body.insertAdjacentHTML('beforeend', `<div id="livechat-typing" class="glass rounded-xl p-2.5 mb-2 inline-flex gap-1 items-center"><span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span><span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse" style="animation-delay:.2s"></span><span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse" style="animation-delay:.4s"></span></div>`);
-    body.scrollTop = body.scrollHeight;
-  } else if(el){ el.remove(); }
-}
-async function sendLiveChat(){
-  if(livechatBusy) return;
-  const input = document.getElementById('livechat-input');
-  const msg = input.value.trim(); if(!msg) return;
-  appendLivechatBubble(msg.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'), true);
-  livechatHistory.push({ role:'user', content: msg });
-  input.value='';
-  livechatBusy = true;
-  setLivechatTyping(true);
-
-  const res = await askClaude(LIVECHAT_SYSTEM, livechatHistory.slice(-10));
-  setLivechatTyping(false);
-  if(res.ok){
-    appendLivechatBubble(res.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'), false);
-    livechatHistory.push({ role:'assistant', content: res.text });
-  } else {
-    appendLivechatBubble("Sorry, I couldn't connect just now. Please try again in a moment, or use the contact form below and our team will follow up by email." +
-      (res.error ? `<br><span class="text-xs opacity-70 mt-1 inline-block font-mono-num">Technical detail: ${escapeHtml(res.error)}</span>` : ''), false);
-  }
-  livechatBusy = false;
-}
-document.getElementById('livechat-input')?.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendLiveChat(); });
 
 /* ============================================================
    FORMS: newsletter + contact (validation, loading, success)
